@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambiar Color de Fondo</title>
+</head>
+<body>
+    <h1>Cambiar el Color de un Párrafo</h1>
+    <p id="parrafo">Este es un párrafo al que le puedes cambiar el color de fondo.</p>
+    <button id="cambiarColorButton">Cambiar Color</button>
+
+    <script>
+        class Elemento {
+            cambiarColor(elemento, color) {
+                elemento.style.backgroundColor = color;
+            }
+        }
+
+        class Boton extends Elemento {
+            constructor() {
+                super();
+                this.button = document.getElementById('cambiarColorButton');
+                this.parrafo = document.getElementById('parrafo');
+            }
+
+            iniciar() {
+                this.button.addEventListener('click', () => {
+                    this.cambiarColor(this.parrafo, 'lightblue');
+                });
+            }
+        }
+
+        const boton = new Boton();
+        boton.iniciar();
+    </script>
+</body>
+</html>

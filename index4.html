@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrador de Tareas</title>
+</head>
+<body>
+    <h1>Administrador de Tareas</h1>
+    <input type="text" id="nombreTarea" placeholder="Nombre de la tarea">
+    <input type="text" id="personaAsignada" placeholder="Persona asignada">
+    <button id="agregarTarea">Agregar Tarea</button>
+
+    <ul id="listaTareas"></ul>
+
+    <script>
+        class AdministradorDeTareas {
+            constructor() {
+                this.lista = document.getElementById('listaTareas');
+            }
+
+            agregarTarea(nombre, persona) {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    Tarea: ${nombre}, Asignada a: ${persona}
+                    <button class="editar">Editar</button>
+                    <button class="eliminar">Eliminar</button>
+                `;
+                this.lista.appendChild(li);
+
+                li.querySelector('.editar').addEventListener('click', () => this.editarTarea(li, nombre, persona));
+                li.querySelector('.eliminar').addEventListener('click', () => this.eliminarTarea(li));
+            }
+
+            editarTarea(li, nombre, persona) {
+                const nuevoNombre = prompt('Nuevo nombre de tarea:', nombre);
+                const nuevaPersona = prompt('Nueva persona asignada:', persona);
+                if (nuevoNombre && nuevaPersona) {
+                    li.innerHTML = `
+                        Tarea: ${nuevoNombre}, Asignada a: ${nuevaPersona}
+                        <button class="editar">Editar</button>
+                        <button class="eliminar">Eliminar</button>
+                    `;
+                    li.querySelector('.editar').addEventListener('click', () => this.editarTarea(li, nuevoNombre, nuevaPersona));
+                    li.querySelector('.eliminar').addEventListener('click', () => this.eliminarTarea(li));
+                }
+            }
+
+            eliminarTarea(li) {
+                li.remove();
+            }
+        }
+
+        const administradorDeTareas = new AdministradorDeTareas();
+        document.getElementById('agregarTarea').addEventListener('click', () => {
+            const nombreTarea = document.getElementById('nombreTarea').value;
+            const personaAsignada = document.getElementById('personaAsignada').value;
+            administradorDeTareas.agregarTarea(nombreTarea, personaAsignada);
+            document.getElementById('nombreTarea').value = '';
+            document.getElementById('personaAsignada').value = '';
+        });
+    </script>
+</body>
+</html>

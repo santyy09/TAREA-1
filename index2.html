@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tareas</title>
+</head>
+<body>
+    <h1>Agregar Tareas a la Lista</h1>
+    <input type="text" id="tareaInput" placeholder="Nueva tarea">
+    <button id="agregarTarea">Agregar Tarea</button>
+
+    <ul id="listaTareas"></ul>
+
+    <script>
+        class ListaTareas {
+            constructor() {
+                this.lista = document.getElementById('listaTareas');
+            }
+
+            agregarTarea(tarea) {
+                const li = document.createElement('li');
+                li.textContent = tarea;
+                this.lista.appendChild(li);
+            }
+        }
+
+        const listaTareas = new ListaTareas();
+        document.getElementById('agregarTarea').addEventListener('click', () => {
+            const tarea = document.getElementById('tareaInput').value;
+            listaTareas.agregarTarea(tarea);
+            document.getElementById('tareaInput').value = '';
+        });
+    </script>
+</body>
+</html>

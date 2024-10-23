@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería de Imágenes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .gallery img {
+            width: 200px;
+            height: 200px;
+            margin: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Galería de Imágenes</h1>
+    <div class="gallery" id="gallery"></div>
+    <button id="addImage">Agregar Imagen</button>
+
+    <script>
+        class Imagen {
+            constructor(url) {
+                this.url = url;
+            }
+
+            mostrar() {
+                const img = document.createElement('img');
+                img.src = this.url;
+                document.getElementById('gallery').appendChild(img);
+            }
+        }
+
+        class Galeria {
+            constructor() {
+                this.button = document.getElementById('addImage');
+            }
+
+            iniciar() {
+                this.button.addEventListener('click', () => {
+                    const nuevaImagen = new Imagen('https://via.placeholder.com/200');
+                    nuevaImagen.mostrar();
+                });
+            }
+        }
+
+        const galeria = new Galeria();
+        galeria.iniciar();
+    </script>
+</body>
+</html>
